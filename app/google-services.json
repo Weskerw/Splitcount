@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "902151994481",
+    "project_id": "splitcount-e3b3e",
+    "storage_bucket": "splitcount-e3b3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902151994481:android:e7d5f913831a19780dafd0",
+        "android_client_info": {
+          "package_name": "com.example.splitcount"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902151994481-7ne75mcj1kpvuhktlhts83mlp4lt2icg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHHB_NFzDd3LxwZxxbNolEEiF3B3Pr8ng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902151994481-7ne75mcj1kpvuhktlhts83mlp4lt2icg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
