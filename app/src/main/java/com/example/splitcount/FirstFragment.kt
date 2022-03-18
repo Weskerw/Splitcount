@@ -1,5 +1,6 @@
 package com.example.splitcount
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.splitcount.databinding.FragmentFirstBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -14,7 +18,7 @@ import com.example.splitcount.databinding.FragmentFirstBinding
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-
+    private lateinit var auth: FirebaseAuth
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -33,7 +37,11 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            auth = Firebase.auth
+            auth.signOut()
+            val intent = Intent (getActivity(), LoginActivity::class.java)
+            getActivity()?.startActivity(intent)
+//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 

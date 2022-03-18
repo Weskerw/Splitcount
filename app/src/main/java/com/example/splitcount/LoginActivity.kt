@@ -34,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
             val regIntent = Intent(this, RegisterActivity::class.java)
             startActivity(regIntent)
         }
+
+        btnLogin.setOnClickListener{
+            login(username.text.toString(), password.text.toString());
+        }
     }
 
     public override fun onStart() {
@@ -46,13 +50,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAccount(){
-        auth.createUserWithEmailAndPassword(username.text.toString(), password.text.toString())
+
+
+    private fun login(email:String, password:String){
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
                     val user = auth.currentUser
-
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
 
                     Toast.makeText(baseContext, "Authentication failed.",
