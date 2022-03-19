@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -16,6 +17,7 @@ import com.example.splitcount.databinding.ActivityMainBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +48,8 @@ class MainActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
+        if(auth.currentUser == null){
 
-        val currentUser = auth.currentUser
-        if(currentUser == null){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -67,13 +67,35 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.logout -> {
+                auth.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    private fun getAllSplitcount(){
+        val db = Firebase.firestore
+
+        db.collection("splitcounts")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+
+                }
+            }
+            .addOnFailureListener { exception ->
+
+            }
     }
 }

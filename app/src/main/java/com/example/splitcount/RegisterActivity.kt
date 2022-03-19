@@ -76,14 +76,10 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(username, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
-                    val user = auth.currentUser
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(baseContext, task.exception?.message.toString(),
-                        Toast.LENGTH_LONG).show()
-
+                    setError(task.exception?.message.toString());
                 }
             }
     }
